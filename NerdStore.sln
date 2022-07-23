@@ -35,6 +35,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NerdStore.WebApp.MVC", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdStore.Vendas.Domain", "src\NerdStore.Vendas.Domain\NerdStore.Vendas.Domain.csproj", "{4C6104CD-AB1C-4821-9A10-3585C557A448}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdStore.Vendas.Application", "src\NerdStore.Vendas.Application\NerdStore.Vendas.Application.csproj", "{516FC1A6-281B-4885-ABF1-D960E3AE62E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdStore.Vendas.Data", "src\NerdStore.Vendas.Data\NerdStore.Vendas.Data.csproj", "{6B15EFE3-A465-43E0-A335-F1423263BC09}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +73,14 @@ Global
 		{4C6104CD-AB1C-4821-9A10-3585C557A448}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C6104CD-AB1C-4821-9A10-3585C557A448}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C6104CD-AB1C-4821-9A10-3585C557A448}.Release|Any CPU.Build.0 = Release|Any CPU
+		{516FC1A6-281B-4885-ABF1-D960E3AE62E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{516FC1A6-281B-4885-ABF1-D960E3AE62E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{516FC1A6-281B-4885-ABF1-D960E3AE62E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{516FC1A6-281B-4885-ABF1-D960E3AE62E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B15EFE3-A465-43E0-A335-F1423263BC09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B15EFE3-A465-43E0-A335-F1423263BC09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B15EFE3-A465-43E0-A335-F1423263BC09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B15EFE3-A465-43E0-A335-F1423263BC09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,6 +100,8 @@ Global
 		{45E7AC0D-B761-441D-A925-26CF8838A121} = {E65E2A99-D348-42DB-9DD2-A3F5BF2A15C6}
 		{0C69BC2F-17CA-411F-BEB3-40BD855DFEB5} = {D63EAEED-117F-4A31-A31F-5F12127C4DDA}
 		{4C6104CD-AB1C-4821-9A10-3585C557A448} = {244BEAFE-BC90-4949-8172-3E04A7E10BF5}
+		{516FC1A6-281B-4885-ABF1-D960E3AE62E3} = {244BEAFE-BC90-4949-8172-3E04A7E10BF5}
+		{6B15EFE3-A465-43E0-A335-F1423263BC09} = {244BEAFE-BC90-4949-8172-3E04A7E10BF5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EAA937C2-FF5E-41EF-B0C7-07FBFDDCC301}
