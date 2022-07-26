@@ -32,6 +32,7 @@ namespace NerdStore.WebApp.MVC.Controllers
             }
 
             var command = new AdicionarItemPedidoCommand(ClienteId, produto.Id, produto.Nome, quantidade, produto.Valor);
+            await _mediatrHandler.EnviarComando(command);
 
 
             TempData["Erros"] = "Produto Indisponível";
