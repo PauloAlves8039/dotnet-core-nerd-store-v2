@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NerdStore.Catalogo.Domain.Domain;
-using NerdStore.Core.DomainObjects.Interfaces;
+using NerdStore.Catalogo.Domain.Entities;
+using NerdStore.Core.Data;
+using NerdStore.Core.Messages;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace NerdStore.Catalogo.Data.Context
 {
     public class CatalogoContext : DbContext, IUnitOfWork
     {
-        public CatalogoContext(DbContextOptions<CatalogoContext> options) : base(options) { }
+        public CatalogoContext(DbContextOptions<CatalogoContext> options) : base(options) {}
 
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
@@ -18,7 +19,9 @@ namespace NerdStore.Catalogo.Data.Context
         {
             foreach (var property in modelBuilder.Model.GetEntityTypes().SelectMany(
                 e => e.GetProperties().Where(p => p.ClrType == typeof(string))))
-                property.SetColumnType("varchar(100)");
+                property.Relational().ColumnType = "varchar(100)";
+
+            modelBuilder.Ignore<Event>();
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(CatalogoContext).Assembly);
         }
@@ -40,6 +43,5 @@ namespace NerdStore.Catalogo.Data.Context
 
             return await base.SaveChangesAsync() > 0;
         }
-
     }
 }

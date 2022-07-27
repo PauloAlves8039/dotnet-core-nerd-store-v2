@@ -18,5 +18,6 @@ namespace NerdStore.Core.Messages
         {
             throw new NotImplementedException();
         }
+
     }
 }

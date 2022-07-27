@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using NerdStore.Catalogo.Application.ViewModels;
-using NerdStore.Catalogo.Domain.Domain;
+using NerdStore.Catalogo.Domain.Entities;
+using NerdStore.Catalogo.Domain.Entities.ValueObject;
 
 namespace NerdStore.Catalogo.Application.AutoMapper
 {

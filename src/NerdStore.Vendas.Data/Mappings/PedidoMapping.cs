@@ -1,24 +1,23 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using NerdStore.Vendas.Domain.Domain;
+using NerdStore.Vendas.Domain.Entities;
 
 namespace NerdStore.Vendas.Data.Mappings
 {
-    public class PedidoMapping : IEntityTypeConfiguration<Voucher>
+    public class PedidoMapping : IEntityTypeConfiguration<Pedido>
     {
-        public void Configure(EntityTypeBuilder<Voucher> builder)
+        public void Configure(EntityTypeBuilder<Pedido> builder)
         {
             builder.HasKey(c => c.Id);
 
             builder.Property(c => c.Codigo)
-                .IsRequired()
-                .HasColumnType("varchar(100)");
+                .HasDefaultValueSql("NEXT VALUE FOR MinhaSequencia");
 
-            builder.HasMany(c => c.Pedidos)
-                .WithOne(c => c.Voucher)
-                .HasForeignKey(c => c.VoucherId);
+            builder.HasMany(c => c.PedidoItems)
+                .WithOne(c => c.Pedido)
+                .HasForeignKey(c => c.PedidoId);
 
-            builder.ToTable("Vouchers");
+            builder.ToTable("Pedidos");
         }
     }
 }

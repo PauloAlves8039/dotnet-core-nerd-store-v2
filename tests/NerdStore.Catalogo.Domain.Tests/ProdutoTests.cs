@@ -1,4 +1,5 @@
-﻿using NerdStore.Catalogo.Domain.Domain;
+﻿using NerdStore.Catalogo.Domain.Entities;
+using NerdStore.Catalogo.Domain.Entities.ValueObject;
 using NerdStore.Core.DomainObjects;
 using System;
 using Xunit;
@@ -8,7 +9,7 @@ namespace NerdStore.Catalogo.Domain.Tests
     public class ProdutoTests
     {
         [Fact]
-        public void Produto_Validar_ValidacoesDevemRetornarException()
+        public void Produto_Validar_ValidacoesDevemRetornarExceptions()
         {
             var ex = Assert.Throws<DomainException>(() =>
                 new Produto(string.Empty, "Descricao", false, 100, Guid.NewGuid(), DateTime.Now, "Imagem", new Dimensoes(1, 1, 1))

@@ -17,20 +17,20 @@ namespace NerdStore.WebApp.MVC.Controllers.Admin
 
         [HttpGet]
         [Route("admin-produtos")]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index() 
         {
             return View(await _produtoAppService.ObterTodos());
         }
 
         [Route("novo-produto")]
-        public async Task<IActionResult> NovoProduto()
+        public async Task<IActionResult> NovoProduto() 
         {
             return View(await PopularCategorias(new ProdutoViewModel()));
         }
 
         [Route("novo-produto")]
         [HttpPost]
-        public async Task<IActionResult> NovoProduto(ProdutoViewModel produtoViewModel)
+        public async Task<IActionResult> NovoProduto(ProdutoViewModel produtoViewModel) 
         {
             if (!ModelState.IsValid) return View(await PopularCategorias(produtoViewModel));
             await _produtoAppService.AdicionarProduto(produtoViewModel);

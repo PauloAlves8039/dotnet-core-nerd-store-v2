@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using NerdStore.Catalogo.Application.ViewModels;
-using NerdStore.Catalogo.Domain.Domain;
+using NerdStore.Catalogo.Domain.Entities;
 using NerdStore.Catalogo.Domain.Interfaces;
 using NerdStore.Core.DomainObjects;
 using System;
@@ -15,11 +15,13 @@ namespace NerdStore.Catalogo.Application.Services
         private readonly IEstoqueService _estoqueService;
         private readonly IMapper _mapper;
 
-        public ProdutoAppService(IProdutoRepository produtoRepository, IEstoqueService estoqueService, IMapper mapper)
+        public ProdutoAppService(IProdutoRepository produtoRepository,
+                                 IMapper mapper,
+                                 IEstoqueService estoqueService)
         {
             _produtoRepository = produtoRepository;
-            _estoqueService = estoqueService;
             _mapper = mapper;
+            _estoqueService = estoqueService;
         }
 
         public async Task<IEnumerable<ProdutoViewModel>> ObterPorCategoria(int codigo)
@@ -35,6 +37,11 @@ namespace NerdStore.Catalogo.Application.Services
         public async Task<IEnumerable<ProdutoViewModel>> ObterTodos()
         {
             return _mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterTodos());
+        }
+
+        public async Task<IEnumerable<CategoriaViewModel>> ObterCategorias()
+        {
+            return _mapper.Map<IEnumerable<CategoriaViewModel>>(await _produtoRepository.ObterCategorias());
         }
 
         public async Task AdicionarProduto(ProdutoViewModel produtoViewModel)
@@ -61,11 +68,6 @@ namespace NerdStore.Catalogo.Application.Services
             }
 
             return _mapper.Map<ProdutoViewModel>(await _produtoRepository.ObterPorId(id));
-        }
-
-        public async Task<IEnumerable<CategoriaViewModel>> ObterCategorias()
-        {
-            return _mapper.Map<IEnumerable<CategoriaViewModel>>(await _produtoRepository.ObterCategorias());
         }
 
         public async Task<ProdutoViewModel> ReporEstoque(Guid id, int quantidade)

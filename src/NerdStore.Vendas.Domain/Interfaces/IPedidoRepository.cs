@@ -1,10 +1,9 @@
-﻿using NerdStore.Core.DomainObjects.Interfaces;
-using NerdStore.Vendas.Domain.Domain;
+﻿using NerdStore.Core.Data;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace NerdStore.Vendas.Domain.Interfaces
+namespace NerdStore.Vendas.Domain.Entities.Interfaces
 {
     public interface IPedidoRepository : IRepository<Pedido>
     {

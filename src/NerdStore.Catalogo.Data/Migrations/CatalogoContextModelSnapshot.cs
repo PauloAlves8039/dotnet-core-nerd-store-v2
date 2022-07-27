@@ -15,18 +15,16 @@ namespace NerdStore.Catalogo.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("NerdStore.Catalogo.Domain.Domain.Categoria", b =>
+            modelBuilder.Entity("NerdStore.Catalogo.Domain.Entities.Categoria", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<int>("Codigo")
-                        .HasColumnType("int");
+                    b.Property<int>("Codigo");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -37,20 +35,16 @@ namespace NerdStore.Catalogo.Data.Migrations
                     b.ToTable("Categorias");
                 });
 
-            modelBuilder.Entity("NerdStore.Catalogo.Domain.Domain.Produto", b =>
+            modelBuilder.Entity("NerdStore.Catalogo.Domain.Entities.Produto", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Ativo")
-                        .HasColumnType("bit");
+                    b.Property<bool>("Ativo");
 
-                    b.Property<Guid>("CategoriaId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<Guid>("CategoriaId");
 
-                    b.Property<DateTime>("DataCadastro")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTime>("DataCadastro");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
@@ -64,11 +58,9 @@ namespace NerdStore.Catalogo.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(250)");
 
-                    b.Property<int>("QuantidadeEstoque")
-                        .HasColumnType("int");
+                    b.Property<int>("QuantidadeEstoque");
 
-                    b.Property<decimal>("Valor")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<decimal>("Valor");
 
                     b.HasKey("Id");
 
@@ -77,47 +69,38 @@ namespace NerdStore.Catalogo.Data.Migrations
                     b.ToTable("Produtos");
                 });
 
-            modelBuilder.Entity("NerdStore.Catalogo.Domain.Domain.Produto", b =>
+            modelBuilder.Entity("NerdStore.Catalogo.Domain.Entities.Produto", b =>
                 {
-                    b.HasOne("NerdStore.Catalogo.Domain.Domain.Categoria", "Categoria")
+                    b.HasOne("NerdStore.Catalogo.Domain.Entities.Categoria", "Categoria")
                         .WithMany("Produtos")
                         .HasForeignKey("CategoriaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.OwnsOne("NerdStore.Catalogo.Domain.Domain.Dimensoes", "Dimensoes", b1 =>
+                    b.OwnsOne("NerdStore.Catalogo.Domain.Entities.ValueObject.Dimensoes", "Dimensoes", b1 =>
                         {
-                            b1.Property<Guid>("ProdutoId")
-                                .HasColumnType("uniqueidentifier");
+                            b1.Property<Guid>("ProdutoId");
 
                             b1.Property<int>("Altura")
-                                .HasColumnType("int")
-                                .HasColumnName("Altura");
+                                .HasColumnName("Altura")
+                                .HasColumnType("int");
 
                             b1.Property<int>("Largura")
-                                .HasColumnType("int")
-                                .HasColumnName("Largura");
+                                .HasColumnName("Largura")
+                                .HasColumnType("int");
 
                             b1.Property<int>("Profundidade")
-                                .HasColumnType("int")
-                                .HasColumnName("Profundidade");
+                                .HasColumnName("Profundidade")
+                                .HasColumnType("int");
 
                             b1.HasKey("ProdutoId");
 
                             b1.ToTable("Produtos");
 
-                            b1.WithOwner()
-                                .HasForeignKey("ProdutoId");
+                            b1.HasOne("NerdStore.Catalogo.Domain.Entities.Produto")
+                                .WithOne("Dimensoes")
+                                .HasForeignKey("NerdStore.Catalogo.Domain.Entities.ValueObject.Dimensoes", "ProdutoId")
+                                .OnDelete(DeleteBehavior.Cascade);
                         });
-
-                    b.Navigation("Categoria");
-
-                    b.Navigation("Dimensoes");
-                });
-
-            modelBuilder.Entity("NerdStore.Catalogo.Domain.Domain.Categoria", b =>
-                {
-                    b.Navigation("Produtos");
                 });
 #pragma warning restore 612, 618
         }
