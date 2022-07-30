@@ -23,11 +23,12 @@ namespace NerdStore.Vendas.Domain
 
         public void AdicionarItem(PedidoItem pedidoItem) 
         {
-            if (pedidoItem.Quantidade > MAX_UNIDADES_ITEM) throw new DomainException($"Máximo de {MAX_UNIDADES_ITEM} unidades por produto");
-            
-            if (_pedidoItems.Any(p => p.ProdutoId == pedidoItem.ProdutoId)) 
+            ValidarQuantidadeItemPermitida(pedidoItem);
+
+            if (PedidoItemExistente(pedidoItem)) 
             {
                 var itemExistente = _pedidoItems.FirstOrDefault(p => p.ProdutoId == pedidoItem.ProdutoId);
+
                 itemExistente.AdicionarUnidades(pedidoItem.Quantidade);
                 pedidoItem = itemExistente;
                 _pedidoItems.Remove(itemExistente);
@@ -45,6 +46,23 @@ namespace NerdStore.Vendas.Domain
         private void CalcularValorPedido()
         {
             ValorTotal = PedidoItems.Sum(i => i.CalcularValor());
+        }
+
+        private bool PedidoItemExistente(PedidoItem item)
+        {
+            return _pedidoItems.Any(p => p.ProdutoId == item.ProdutoId);
+        }
+
+        private void ValidarQuantidadeItemPermitida(PedidoItem item)
+        {
+            var quantidadeItems = item.Quantidade;
+            if (PedidoItemExistente(item))
+            {
+                var itemExistente = _pedidoItems.FirstOrDefault(p => p.ProdutoId == item.ProdutoId);
+                quantidadeItems += itemExistente.Quantidade;
+            }
+
+            if (quantidadeItems > MAX_UNIDADES_ITEM) throw new DomainException($"Máximo de {MAX_UNIDADES_ITEM} unidades por produto.");
         }
 
         public static class PedidoFactory
